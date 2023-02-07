@@ -424,7 +424,52 @@ class StudentManageInput:
             else:
                 print("Please enter a number between 1 and 4")
 
+    def option_from_main_menu(self, option):
+        if option == 1:
+            self.add_student_to_students()
+            return True
+        elif option == 2:
+            self.edit_student_from_students()
+            return True
+        elif option == 3:
+            self.delete_student_from_students()
+            return True
+        elif option == 4:
+            self.StudentFunction.list_students()
+            return True
+        elif option == 5:
+            self.create_search()
+            return True
+        elif option == 6:
+            self.manage_task_to_student()
+            return True
+        elif option == 7:
+            confirm = input("\nAre you sure you want to exit the Address Book? Type y/n: ")
+            if confirm.lower() == "y" or confirm == "yes":
+                print("\n          Thank you for using this Student Task Management System.          "
+                      "\n                                 Goodbye!                                   ")
+                exit()
+            elif confirm.lower() == "n" or confirm == "no":
+                print("Returning to the main menu of the System...\n")
+                self.run_menu()
+            else:
+                print("Please enter a valid answer.")
+                confirm = input("\nAre you sure you want to exit the Address Book? Type y/n: ")
+                if confirm.lower() == "y" or confirm == "yes":
+                    print("\n          Thank you for using this Student Task Management System.          "
+                          "\n                                 Goodbye!                                   ")
+                    exit()
+                elif confirm.lower() == "n" or confirm == "no":
+                    print("Returning to the main menu of the System...\n")
+                    self.run_menu()
+            return False
+        else:
+            print("\nInvalid option, please enter an option correctly!\n")
+            self.run_menu()
+            return True
+
     def run_menu(self):
+
 
 
 

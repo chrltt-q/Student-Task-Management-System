@@ -425,25 +425,25 @@ class StudentManageInput:
                 print("Please enter a number between 1 and 4")
 
     def option_from_main_menu(self, option):
-        if option == 1:
+        if option == "1":
             self.add_student_to_students()
             return True
-        elif option == 2:
+        elif option == "2":
             self.edit_student_from_students()
             return True
-        elif option == 3:
+        elif option == "3":
             self.delete_student_from_students()
             return True
-        elif option == 4:
+        elif option == "4":
             self.StudentFunction.list_students()
             return True
-        elif option == 5:
+        elif option == "5":
             self.create_search()
             return True
-        elif option == 6:
+        elif option == "6":
             self.manage_task_to_student()
             return True
-        elif option == 7:
+        elif option == "7":
             confirm = input("\nAre you sure you want to exit the Address Book? Type y/n: ")
             if confirm.lower() == "y" or confirm == "yes":
                 print("\n          Thank you for using this Student Task Management System.          "
@@ -469,8 +469,32 @@ class StudentManageInput:
             return True
 
     def run_menu(self):
+        running = True
+        while running:
+            print("***~~~*~*~~*~*~*~*~*~~*~*~***~*~*~~*~*~*~*~*~~*~*~~~***")
+            print("           Student Task Management System              ")
+            print("***~~~*~*~~*~*~*~*~*~~*~*~***~*~*~~*~*~*~*~*~~*~*~~~***")
+            welcome = "                Welcome  Student!                \n"
+            main_menu = """What would you like to do?
+               ||  1  ||    Add Student         
+               ||  2  ||    Edit Student        
+               ||  3  ||    Delete Student       
+               ||  4  ||    View Students 
+               ||  5  ||    Search Student       
+               ||  6  ||    Manage Task  
+               ||  7  ||    Exit                 """
+            print(welcome)
+            print(main_menu)
+            option = input("Enter the option you choose: ")
+            running = self.option_from_main_menu(option)
 
 
+def main():
+    """ Main program """
+    runner = StudentManageInput()
+    runner.run_menu()
+    return 0
 
 
-
+if __name__ == "__main__":
+    main()

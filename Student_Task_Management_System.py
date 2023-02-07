@@ -3,25 +3,25 @@ from bst_demo import BSTDemo, Node
 
 
 def get_task_input_details():
-    start_time = input("Enter the time in hh:mm format, example 18:30 or 6:30 -> ")
+    start_time = input("Enter the time in hh:mm format (example 18:30 or 6:30): ")
     while True:
         try:
             datetime.strptime(start_time, '%H:%M')
         except ValueError:
             print("Incorrect time format, it should be hh:mm")
-            start_time = input("Enter the time in hh:mm format, ex 18:30 or 6:30 -> ")
+            start_time = input("Enter the time in hh:mm format (example 18:30 or 6:30): ")
         else:
             break
-    duration_of_task = input("Enter the duration of the task in minutes, ex 60 -> ")
+    duration_of_task = input("Enter the duration of the task in minutes (example 60): ")
     while True:
         try:
             int(duration_of_task)
         except ValueError:
             print("Please enter a valid number for number of minutes.")
-            duration_of_task = input("Enter the duration of the task in minutes, ex 60 -> ")
+            duration_of_task = input("Enter the duration of the task in minutes (example 60):  ")
         else:
             break
-    task_name = input("Enter the name of the task (case sensitive)-> ")
+    task_name = input("Enter the name of the task (case sensitive): ")
     return start_time, duration_of_task, task_name
 
 
@@ -74,7 +74,7 @@ class StudentFunction:
     def list_students(self):
         print("\n                              * * * View Students * * *                        \n")
         counting = len(self.students_list)
-        print("               Number of Students Recorded In The System:", counting, "\n")
+        print("               Number of Students Recorded In The Student Task Management System:", counting, "\n")
         if not self.students_list:
             print("No students found.")
         for student in self.students_list:
@@ -164,7 +164,7 @@ class StudentManageInput:
         new_phone = " "
         option = " "
         while not done:
-            print("Which Student in the System do you want to edit?")
+            print("Which Student in the Student Task Management System do you want to edit?")
             print("""   Choose an option below to locate the student.   
                (a) First Name
                (b) Last Name
@@ -193,7 +193,7 @@ class StudentManageInput:
             print("Searching for the student you want to edit, please wait...")
             self.StudentFunction.search_students(first_n, last_n, student_no, course, address, phone)
             if not self.StudentFunction.students_list:
-                print("Returning to the main menu of the System...\n")
+                print("Returning to the main menu of the Student Task Management System...\n")
                 self.run_menu()
         while not final_done:
             print("""   What information from this student do you want to edit?   
@@ -219,13 +219,13 @@ class StudentManageInput:
             else:
                 print("Please enter a valid input!")
                 continue
-            print("Do you want to save the changes you edited for this contact? Type y/n: ")
+            print("Do you want to save the changes you edited for this student? Type y/n: ")
             final_done = input() == "y"
             option = edit2_option
         self.StudentFunction.edit_student(first_n, new_first_n, last_n, new_last_n, student_no, new_student_no,
                                           course, new_course, address, new_address, phone, new_phone, option)
         print("Changes in the student have been saved successfully!")
-        print("Returning to the main menu of the System...\n")
+        print("Returning to the main menu of the Student Task Management System...\n")
         self.run_menu()
 
     def delete_student_from_students(self):
@@ -238,7 +238,7 @@ class StudentManageInput:
         address = " "
         phone = " "
         while not done:
-            print("Which Student in the System do you want to delete?")
+            print("Which Student in the Student Task Management System do you want to delete?")
             print("""   Choose an option below to locate the student.   
                (a) First Name
                (b) Last Name
@@ -267,17 +267,17 @@ class StudentManageInput:
             print("Searching for the student you want to delete, please wait...")
             self.StudentFunction.search_students(first_n, last_n, student_no, course, address, phone)
             if not self.StudentFunction.students_list:
-                print("Returning to the main menu of the System...\n")
+                print("Returning to the main menu of the Student Task Management System...\n")
                 self.run_menu()
-        confirm = input("\nAre you sure you want to delete this student in the System? Type y/n: ")
+        confirm = input("\nAre you sure you want to delete this student? Type y/n: ")
         if confirm.lower() == "y":
-            self.StudentFunction.delete_student(first_n, last_n, address, phone)
-            print("Student deleted successfully!")
-            print("Returning to the main menu of the System...\n")
+            self.StudentFunction.delete_student(first_n, last_n, student_no, course, address, phone)
+            print("Student deleted successfully in the Student Task Management System!")
+            print("Returning to the main menu of the Student Task Management System...\n")
             self.run_menu()
         elif confirm.lower() == "n":
-            print("Student is not deleted in the System.")
-            print("Returning to the main menu of the System...\n")
+            print("Student is not deleted in the Student Task Management System.")
+            print("Returning to the main menu of the Student Task Management System...\n")
             self.run_menu()
 
     def create_search(self):
@@ -290,7 +290,7 @@ class StudentManageInput:
         address = " "
         phone = " "
         while not done:
-            print("Which Student in the System do you want to search?")
+            print("Which Student in the Student Task Management System do you want to search?")
             print("""   Choose an option below to locate the student.   
                (a) First Name
                (b) Last Name
@@ -318,7 +318,7 @@ class StudentManageInput:
             done = input() == "n"
         print("Searching for the student, please wait...")
         self.StudentFunction.search_students(first_n, last_n, student_no, course, address, phone)
-        print("Returning to the main menu of the System...\n")
+        print("Returning to the main menu of the Student Task Management System...\n")
         self.run_menu()
 
     def manage_task_to_student(self):
@@ -331,14 +331,14 @@ class StudentManageInput:
         address = " "
         phone = " "
         while not done:
-            print("Which Student in the System do you want to delete?")
+            print("Which Student in the Student Task Management System do you want to manage task?")
             print("""   Choose an option below to locate the student.   
-                       (a) First Name
-                       (b) Last Name
-                       (c) Student Number
-                       (d) Course
-                       (e) Address
-                       (f) Phone Number""")
+               (a) First Name
+               (b) Last Name
+               (c) Student Number
+               (d) Course
+               (e) Address
+               (f) Phone Number""")
             del_option = input("Enter the option you choose (a-f): ")
             if del_option.lower() == "a":
                 first_n = input("Enter the first name of this student: ")
@@ -357,12 +357,12 @@ class StudentManageInput:
                 continue
             print("Would you like to enter more information? Type y/n: ")
             done = input() == "n"
-        print("Searching for the student you want to delete, please wait...")
+        print("Searching for the student you want to manage task, please wait...")
         self.StudentFunction.search_students(first_n, last_n, student_no, course, address, phone)
         if not self.StudentFunction.students_list:
-            print("Returning to the main menu of the System...\n")
+            print("Returning to the main menu of the Student Task Management System...\n")
             self.run_menu()
-        print("Tasks Registered to "f"{first_n} {last_n}:\n")
+        print("Tasks Registered to "f"{first_n} "f"{last_n}: ""\n")
         with open("data.txt") as f:
             for line in f:
                 my_tree.insert(line)
@@ -400,10 +400,10 @@ class StudentManageInput:
                 result = my_tree.find_val(key_to_find)
                 if result:
                     if result.name_of_task == task_name and result.duration == duration_of_task:
-                        print("Removing task:")
+                        print("Removing task: ")
                         print(result)
                         my_tree.delete_val(key_to_find)
-                        print("Task successfully removed")
+                        print("Task successfully removed.")
                         with open("data.txt", "r") as f:
                             lines = f.readlines()
                         with open("data.txt", "w") as f:
@@ -418,8 +418,8 @@ class StudentManageInput:
                     print("Task not found")
                     input("Press any key to continue... ")
             elif int(selection) == 4:
-                print("\n* * * * * * * * * * * * * * *   EXIT   * * * * * * * * * * * * * * *\n")
-                print("Returning to the main menu of the System...\n")
+                print("\n* * * * * * * * * * * *  RETURN TO MAIN MENU * * * * * * * * * * * *\n")
+                print("Returning to the main menu of the Student Task Management System...\n")
                 self.run_menu()
             else:
                 print("Please enter a number between 1 and 4")
@@ -444,23 +444,23 @@ class StudentManageInput:
             self.manage_task_to_student()
             return True
         elif option == "7":
-            confirm = input("\nAre you sure you want to exit the Address Book? Type y/n: ")
+            confirm = input("\nAre you sure you want to exit the Student Task Management System? Type y/n: ")
             if confirm.lower() == "y" or confirm == "yes":
                 print("\n          Thank you for using this Student Task Management System.          "
                       "\n                                 Goodbye!                                   ")
                 exit()
             elif confirm.lower() == "n" or confirm == "no":
-                print("Returning to the main menu of the System...\n")
+                print("Returning to the main menu of the Student Task Management System...\n")
                 self.run_menu()
             else:
                 print("Please enter a valid answer.")
-                confirm = input("\nAre you sure you want to exit the Address Book? Type y/n: ")
+                confirm = input("\nAre you sure you want to exit the Student Task Management System Type y/n: ")
                 if confirm.lower() == "y" or confirm == "yes":
                     print("\n          Thank you for using this Student Task Management System.          "
                           "\n                                 Goodbye!                                   ")
                     exit()
                 elif confirm.lower() == "n" or confirm == "no":
-                    print("Returning to the main menu of the System...\n")
+                    print("Returning to the main menu of the Student Task Management System...\n")
                     self.run_menu()
             return False
         else:

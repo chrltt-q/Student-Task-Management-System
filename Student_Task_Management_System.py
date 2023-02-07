@@ -70,6 +70,16 @@ class StudentFunction:
                     or student.course == course or student.address == address or student.phone == phone:
                 self.students_list.remove(student)
 
+    # Function View Students: The user can view the full list of the students
+    def list_students(self):
+        counting = len(self.students_list)
+        print("               Number of Students Recorded In The System:", counting, "\n")
+        if not self.students_list:
+            print("No students found.")
+        for student in self.students_list:
+            student.print_student()
+
+
 
 
 class Student:
@@ -87,6 +97,11 @@ class Student:
         self.course = course
         self.address = address
         self.phone = phone
+
+    # Function Print Student: It displays / prints the student information
+    def print_student(self):
+        print("""Name: %s\nStudent Number: %s\nCourse: %s\nAddress: %s\nPhone Number: %s\n""" %
+              (self.first_n + " " + self.last_n, self.student_no, self.course, self.address, self.phone))
 
 
 with open("data.txt") as f:

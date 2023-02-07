@@ -60,8 +60,6 @@ class StudentFunction:
                 elif option == "f":
                     edited_phone = phone.replace(phone, new_phone)
                     student.phone = edited_phone
-        if not self.students_list:
-            print("Student not found.")
 
     # Function Delete Student: The user can permanently delete a student's record
     def delete_student(self, first_n, last_n, student_no, course, address, phone):
@@ -82,13 +80,14 @@ class StudentFunction:
 
     # Function Search Student: The user can search a student by searching its student information
         # – either name, student number, course, address, and contact number
-    def search_students(self, first_n, last_n, student_no, course, address, phone):
+    def search_students(self, search_item):
         for student in self.students_list:
-            if first_n == student.first_n or last_n == student.last_n or student_no == student.student_no \
-                    or course == student.course or address == student.address or phone == student.phone:
+            if search_item == student.first_n or search_item == student.last_n or search_item == student.student_no \
+                    or search_item == student.course or search_item == student.address or search_item == student.phone:
                 student.print_student()
-        if not self.students_list:
-            print("Student not found. \n")
+                break
+            if not search_item == self.students_list:
+                print("Student not found. \n")
 
 
 # This class serves as a data storage that will contain all student information
@@ -110,6 +109,7 @@ class Student:
 
     # Function Print Student: It displays / prints the student information
     def print_student(self):
+        print("* * Student Information * *")
         print("""Name: %s\nStudent Number: %s\nCourse: %s\nAddress: %s\nPhone Number: %s\n""" %
               (self.first_n + " " + self.last_n, self.student_no, self.course, self.address, self.phone))
 
@@ -150,6 +150,7 @@ class StudentManageInput:
         print("\n                        * * * EDIT STUDENT * * *                        \n")
         done = False
         final_done = False
+        search_item = " "
         first_n = " "
         last_n = " "
         student_no = " "
@@ -174,63 +175,74 @@ class StudentManageInput:
                (f) Phone Number""")
             edit1_option = input("Enter the option you choose (a-f): ")
             if edit1_option.lower() == "a":
-                first_n = input("Enter the first name of this student: ")
+                search_item = input("Enter the first name of this student: ")
+                first_n = search_item
             elif edit1_option.lower() == "b":
-                last_n = input("Enter the last name of this student: ")
+                search_item = input("Enter the last name of this student: ")
+                last_n = search_item
             elif edit1_option.lower() == "c":
-                student_no = input("Enter the student number of this student: ")
+                search_item = input("Enter the student number of this student: ")
+                student_no = search_item
             elif edit1_option.lower() == "d":
-                course = str(input("Please enter the course of this student: "))
+                search_item = str(input("Enter the course of this student: "))
+                course = search_item
             elif edit1_option.lower() == "e":
-                address = input("Enter the address of this student: ")
+                search_item = input("Enter the address of this student: ")
+                address = search_item
             elif edit1_option.lower() == "f":
-                phone = str(input("Enter the phone number of this student: "))
+                search_item = str(input("Enter the phone number of this student: "))
+                phone = search_item
             else:
                 print("Please enter a valid input!")
                 continue
             print("Would you like to enter more information? Type y/n: ")
             done = input() == "n"
-            print("Searching for the student you want to edit, please wait...")
-            self.StudentFunction.search_students(first_n, last_n, student_no, course, address, phone)
-            if not self.StudentFunction.students_list:
-                print("Returning to the main menu of the Student Task Management System...\n")
-                self.run_menu()
-        while not final_done:
-            print("""   What information from this student do you want to edit?   
-               (a) First Name
-               (b) Last Name
-               (c) Student Number
-               (d) Course
-               (e) Address
-               (f) Phone Number""")
-            edit2_option = input("Enter the option you choose (a-f): ")
-            if edit2_option.lower() == "a":
-                new_first_n = input("Enter the new first name of this student: ")
-            elif edit2_option.lower() == "b":
-                new_last_n = input("Enter the new last name of this student: ")
-            elif edit2_option.lower() == "c":
-                new_student_no = input("Enter the student number of this student: ")
-            elif edit2_option.lower() == "d":
-                new_course = str(input("Please enter the course of this student: "))
-            elif edit2_option.lower() == "e":
-                new_address = input("Enter the new address of this student: ")
-            elif edit2_option.lower() == "f":
-                new_phone = str(input("Enter the new phone number of this student: "))
-            else:
-                print("Please enter a valid input!")
-                continue
-            print("Do you want to save the changes you edited for this student? Type y/n: ")
-            final_done = input() == "y"
-            option = edit2_option
-        self.StudentFunction.edit_student(first_n, new_first_n, last_n, new_last_n, student_no, new_student_no,
-                                          course, new_course, address, new_address, phone, new_phone, option)
-        print("Changes in the student have been saved successfully!")
-        print("Returning to the main menu of the Student Task Management System...\n")
-        self.run_menu()
+        print("Searching for the student, please wait...")
+        self.StudentFunction.search_students(search_item)
+        confirm = input("Would you like to continue editing? Type y/n: ")
+        if confirm.lower() == "y":
+            while not final_done:
+                print("""   What information from this student do you want to edit?   
+                   (a) First Name
+                   (b) Last Name
+                   (c) Student Number
+                   (d) Course
+                   (e) Address
+                   (f) Phone Number""")
+                edit2_option = input("Enter the option you choose (a-f): ")
+                if edit2_option.lower() == "a":
+                    new_first_n = input("Enter the new first name of this student: ")
+                elif edit2_option.lower() == "b":
+                    new_last_n = input("Enter the new last name of this student: ")
+                elif edit2_option.lower() == "c":
+                    new_student_no = input("Enter the student number of this student: ")
+                elif edit2_option.lower() == "d":
+                    new_course = str(input("Please enter the course of this student: "))
+                elif edit2_option.lower() == "e":
+                    new_address = input("Enter the new address of this student: ")
+                elif edit2_option.lower() == "f":
+                    new_phone = str(input("Enter the new phone number of this student: "))
+                else:
+                    print("Please enter a valid input!")
+                    continue
+                print("Do you want to save the changes you edited for this student? Type y/n: ")
+                final_done = input() == "y"
+                option = edit2_option
+            self.StudentFunction.edit_student(first_n, new_first_n, last_n, new_last_n, student_no, new_student_no,
+                                              course, new_course, address, new_address, phone, new_phone,
+                                              option)
+            print("Changes in the student have been saved successfully!")
+            print("Returning to the main menu of the Student Task Management System...\n")
+            self.run_menu()
+        elif confirm.lower() == "n":
+            print("Student is not edited in the Student Task Management System.")
+            print("Returning to the main menu of the Student Task Management System...\n")
+            self.run_menu()
 
     def delete_student_from_students(self):
         print("\n                       * * * DELETE STUDENT * * *                       \n")
         done = False
+        search_item = " "
         first_n = " "
         last_n = " "
         student_no = " "
@@ -248,27 +260,33 @@ class StudentManageInput:
                (f) Phone Number""")
             del_option = input("Enter the option you choose (a-f): ")
             if del_option.lower() == "a":
-                first_n = input("Enter the first name of this student: ")
+                search_item = input("Enter the first name of this student: ")
+                first_n = search_item
             elif del_option.lower() == "b":
-                last_n = input("Enter the last name of this student: ")
+                search_item = input("Enter the last name of this student: ")
+                last_n = search_item
             elif del_option.lower() == "c":
-                student_no = input("Enter the student number of this student: ")
+                search_item = input("Enter the student number of this student: ")
+                student_no = search_item
             elif del_option.lower() == "d":
-                course = str(input("Enter the course of this student: "))
+                search_item = str(input("Enter the course of this student: "))
+                course = search_item
             elif del_option.lower() == "e":
-                address = input("Enter the address of this student: ")
+                search_item = input("Enter the address of this student: ")
+                address = search_item
             elif del_option.lower() == "f":
-                phone = str(input("Enter the phone number of this student: "))
+                search_item = str(input("Enter the phone number of this student: "))
+                phone = search_item
             else:
                 print("Please enter a valid input!")
                 continue
             print("Would you like to enter more information? Type y/n: ")
             done = input() == "n"
-            print("Searching for the student you want to delete, please wait...")
-            self.StudentFunction.search_students(first_n, last_n, student_no, course, address, phone)
-            if not self.StudentFunction.students_list:
-                print("Returning to the main menu of the Student Task Management System...\n")
-                self.run_menu()
+        print("Searching for the student, please wait...")
+        self.StudentFunction.search_students(search_item)
+        if not search_item == self.StudentFunction.students_list:
+            print("Going back to the main menu of the Address Book...\n")
+            self.run_menu()
         confirm = input("\nAre you sure you want to delete this student? Type y/n: ")
         if confirm.lower() == "y":
             self.StudentFunction.delete_student(first_n, last_n, student_no, course, address, phone)
@@ -283,12 +301,7 @@ class StudentManageInput:
     def create_search(self):
         print("\n                        * * * SEARCH STUDENT * * *                        \n")
         done = False
-        first_n = " "
-        last_n = " "
-        student_no = " "
-        course = " "
-        address = " "
-        phone = " "
+        search_item = " "
         while not done:
             print("Which Student in the Student Task Management System do you want to search?")
             print("""   Choose an option below to locate the student.   
@@ -300,30 +313,31 @@ class StudentManageInput:
                (f) Phone Number""")
             respond = input("Enter the option you choose (a-f): ")
             if respond.lower() == "a":
-                first_n = input("Enter the first name of this student: ")
+                search_item = input("Enter the first name of this student: ")
             elif respond.lower() == "b":
-                last_n = input("Enter the last name of this student: ")
+                search_item = input("Enter the last name of this student: ")
             elif respond.lower() == "c":
-                student_no = input("Enter the student number of this student: ")
+                search_item = input("Enter the student number of this student: ")
             elif respond.lower() == "d":
-                course = str(input("Enter the course of this student: "))
+                search_item = str(input("Enter the course of this student: "))
             elif respond.lower() == "e":
-                address = input("Enter the address of this student: ")
+                search_item = input("Enter the address of this student: ")
             elif respond.lower() == "f":
-                phone = str(input("Enter the phone number of this student: "))
+                search_item = str(input("Enter the phone number of this student: "))
             else:
                 print("Please enter a valid input!")
                 continue
             print("Would you like to enter more information? Type y/n: ")
             done = input() == "n"
         print("Searching for the student, please wait...")
-        self.StudentFunction.search_students(first_n, last_n, student_no, course, address, phone)
-        print("Returning to the main menu of the Student Task Management System...\n")
+        self.StudentFunction.search_students(search_item)
+        print("Going back to the main menu of the Address Book...\n")
         self.run_menu()
 
     def manage_task_to_student(self):
         print("\n                       * * * MANAGE TASK * * *                       \n")
         done = False
+        search_item = " "
         first_n = " "
         last_n = " "
         student_no = " "
@@ -339,28 +353,30 @@ class StudentManageInput:
                (d) Course
                (e) Address
                (f) Phone Number""")
-            del_option = input("Enter the option you choose (a-f): ")
-            if del_option.lower() == "a":
-                first_n = input("Enter the first name of this student: ")
-            elif del_option.lower() == "b":
-                last_n = input("Enter the last name of this student: ")
-            elif del_option.lower() == "c":
-                student_no = input("Enter the student number of this student: ")
-            elif del_option.lower() == "d":
-                course = str(input("Enter the course of this student: "))
-            elif del_option.lower() == "e":
-                address = input("Enter the address of this student: ")
-            elif del_option.lower() == "f":
-                phone = str(input("Enter the phone number of this student: "))
+            task_option = input("Enter the option you choose (a-f): ")
+            if task_option.lower() == "a":
+                search_item = input("Enter the first name of this student: ")
+                first_n = search_item
+            elif task_option.lower() == "b":
+                search_item = input("Enter the last name of this student: ")
+                last_n = search_item
+            elif task_option.lower() == "c":
+                search_item = input("Enter the student number of this student: ")
+            elif task_option.lower() == "d":
+                search_item = str(input("Enter the course of this student: "))
+            elif task_option.lower() == "e":
+                search_item = input("Enter the address of this student: ")
+            elif task_option.lower() == "f":
+                search_item = str(input("Enter the phone number of this student: "))
             else:
                 print("Please enter a valid input!")
                 continue
             print("Would you like to enter more information? Type y/n: ")
             done = input() == "n"
-        print("Searching for the student you want to manage task, please wait...")
-        self.StudentFunction.search_students(first_n, last_n, student_no, course, address, phone)
-        if not self.StudentFunction.students_list:
-            print("Returning to the main menu of the Student Task Management System...\n")
+        print("Searching for the student, please wait...")
+        self.StudentFunction.search_students(search_item)
+        if not search_item == self.StudentFunction.students_list:
+            print("Going back to the main menu of the Address Book...\n")
             self.run_menu()
         print("Tasks Registered to "f"{first_n} "f"{last_n}: ""\n")
         with open("data.txt") as f:
@@ -471,10 +487,10 @@ class StudentManageInput:
     def run_menu(self):
         running = True
         while running:
-            print("***~~~*~*~~*~*~*~*~*~~*~*~***~*~*~~*~*~*~*~*~~*~*~~~***")
-            print("           Student Task Management System              ")
-            print("***~~~*~*~~*~*~*~*~*~~*~*~***~*~*~~*~*~*~*~*~~*~*~~~***")
-            welcome = "                Welcome  Student!                \n"
+            print("***~~~***~~~*~*~~*~*~*~*~*~~*~*~***~*~*~~*~*~*~*~*~~*~*~~~******~~~***")
+            print("                   Student Task Management System                     ")
+            print("***~~~***~~~*~*~~*~*~*~*~*~~*~*~***~*~*~~*~*~*~*~*~~*~*~~~******~~~***")
+            welcome = "                        Welcome  Student!                        \n"
             main_menu = """What would you like to do?
                ||  1  ||    Add Student         
                ||  2  ||    Edit Student        
@@ -484,6 +500,7 @@ class StudentManageInput:
                ||  6  ||    Manage Task  
                ||  7  ||    Exit                 """
             print(welcome)
+            print("MAIN MENU")
             print(main_menu)
             option = input("Enter the option you choose: ")
             running = self.option_from_main_menu(option)

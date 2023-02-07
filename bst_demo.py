@@ -3,19 +3,19 @@ from datetime import datetime, timedelta
 
 class Node:
     def __init__(self, key):
-        sched_time, duration, name_of_job = key.split(",")
+        sched_time, duration, name_of_task = key.split(",")
         raw_sched_time = datetime.strptime(sched_time, '%H:%M')
         key = raw_sched_time.time()
         end_time = (raw_sched_time + timedelta(minutes=int(duration))).time()
         self.data = key
         self.scheduled_end = end_time
         self.duration = duration
-        self.name_of_job = name_of_job.rstrip()
+        self.name_of_task = name_of_task.rstrip()
         self.left_child = None
         self.right_child = None
 
     def __str__(self):
-        return f"Time: {self.data}, Duration: {self.duration}, End: {self.scheduled_end}, Job name: {self.name_of_job}"
+        return f"Time: {self.data}, Duration: {self.duration}, End: {self.scheduled_end}, Job name: {self.name_of_task}"
 
 
 class BSTDemo:
@@ -49,19 +49,19 @@ class BSTDemo:
 
     def helpful_print(self, key, succeeded):
         if succeeded:
-            print(f"Added:\t\t {key.name_of_job}")
+            print(f"Added:\t\t {key.name_of_task}")
             print(f"Begin:\t\t {key.data}")
             print(f"End:\t\t {key.scheduled_end}")
             print("-"*60)
         else:
-            print(f"Rejected:\t {key.name_of_job}")
+            print(f"Rejected:\t {key.name_of_task}")
             print(f"Begin:\t\t {key.data}")
             print(f"End:\t\t {key.scheduled_end}")
             print("Reason:\t Time slot overlap, please verify")
             print("-"*60)
 
     def in_order(self):
-        print("Full job schedule for today")
+        print("Full task schedule for today")
         print("-"*60)
         self._in_order(self.root)
         print("-"*60)

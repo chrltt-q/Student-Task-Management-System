@@ -114,7 +114,7 @@ class Student:
         print("""Name: %s\nStudent Number: %s\nCourse: %s\nAddress: %s\nPhone Number: %s""" %
               (self.first_n.upper() + " " + self.last_n.upper(), self.student_no, self.course.upper(),
                self.address.upper(), self.phone))
-        print("-\n" * 60)
+        print("-" * 60 + "\n")
 
 
 class StudentManageInput:
@@ -124,10 +124,26 @@ class StudentManageInput:
     def user_student_info(self):
         first_n = input("Enter the first name of the student: ")
         last_n = input("Enter the last name of the student: ")
-        student_no = (input("Enter the student number of the student: "))
+        student_no = input("Enter the student number of the student: ")
+        while True:
+            try:
+                int(student_no)
+            except ValueError:
+                print("Please enter a valid number for student number.")
+                student_no = input("Enter the student number of the student: ")
+            else:
+                break
         course = input("Enter the course of the student: ")
         address = input("Enter the address of the student: ")
-        phone = (input("Enter the phone number of the student: "))
+        phone = input("Enter the phone number of the student: ")
+        while True:
+            try:
+                int(phone)
+            except ValueError:
+                print("Please enter a valid number for phone number.")
+                phone = input("Enter the phone number of the student: ")
+            else:
+                break
         return first_n, last_n, student_no, course, address, phone
 
     def add_student_to_students(self):
@@ -494,7 +510,7 @@ class StudentManageInput:
             print("***~~~***~~~*~*~~*~*~*~*~*~~*~*~***~*~*~~*~*~*~*~*~~*~*~~~******~~~***")
             print("                   Student Task Management System                     ")
             print("***~~~***~~~*~*~~*~*~*~*~*~~*~*~***~*~*~~*~*~*~*~*~~*~*~~~******~~~***")
-            welcome = "                         Welcome Student!                        \n"
+            welcome = "                          Welcome Student!                        \n"
             main_menu = """What would you like to do?
                ||  1  ||    Add Student         
                ||  2  ||    Edit Student        

@@ -118,6 +118,15 @@ class StudentManageInput:
     def __init__(self):
         self.StudentFunction = StudentFunction()
 
+    def user_student_info(self):
+        first_n = input("Enter the first name of the student: ")
+        last_n = input("Enter the last name of the student: ")
+        student_no = str(input("Enter the student number of the student: "))
+        course = input("Enter the course of the student: ")
+        address = input("Enter the address of the student: ")
+        phone = str(input("Enter the phone number of the student: "))
+        return first_n, last_n, student_no, course, address, phone
+
 
 
 

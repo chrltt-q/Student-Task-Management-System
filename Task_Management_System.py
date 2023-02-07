@@ -27,6 +27,33 @@ def get_task_input_details():
 
 my_tree = BSTDemo()
 
+
+class StudentFunction:
+    students_list = []
+
+    # Function Add Student: The user can add student information - name, student number, course
+    # address, and contact number
+    def add_student(self, first_n, last_n, student_no, course, address, phone):
+        self.students_list.append()
+
+
+class Student:
+    first_n = None
+    last_n = None
+    student_no = None
+    course = None
+    Address = None
+    Phone = None
+
+    def __init__(self, first_n, last_n, student_no, course, address, phone):
+        self.first_n = first_n
+        self.last_n = last_n
+        self.student_no = student_no
+        self.course = course
+        self.address = address
+        self.phone = phone
+
+
 with open("data.txt") as f:
     for line in f:
         my_tree.insert(line)

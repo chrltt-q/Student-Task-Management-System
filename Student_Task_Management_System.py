@@ -72,6 +72,7 @@ class StudentFunction:
 
     # Function View Students: The user can view the full list of the students
     def list_students(self):
+        print("\n                              * * * View Students * * *                        \n")
         counting = len(self.students_list)
         print("               Number of Students Recorded In The System:", counting, "\n")
         if not self.students_list:
@@ -79,9 +80,18 @@ class StudentFunction:
         for student in self.students_list:
             student.print_student()
 
+    # Function Search Student: The user can search a student by searching its student information
+        # – either name, student number, course, address, and contact number
+    def search_students(self, first_n, last_n, student_no, course, address, phone):
+        for student in self.students_list:
+            if first_n == student.first_n or last_n == student.last_n or student_no == student.student_no \
+                    or course == student.course or address == student.address or phone == student.phone:
+                student.print_student()
+        if not self.students_list:
+            print("Student not found. \n")
 
 
-
+# This class serves as a data storage that will contain all student information
 class Student:
     first_n = None
     last_n = None
@@ -102,6 +112,13 @@ class Student:
     def print_student(self):
         print("""Name: %s\nStudent Number: %s\nCourse: %s\nAddress: %s\nPhone Number: %s\n""" %
               (self.first_n + " " + self.last_n, self.student_no, self.course, self.address, self.phone))
+
+
+class StudentManageInput:
+    def __init__(self):
+        self.StudentFunction = StudentFunction()
+
+
 
 
 with open("data.txt") as f:

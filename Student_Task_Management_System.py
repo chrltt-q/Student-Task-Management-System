@@ -109,9 +109,12 @@ class Student:
 
     # Function Print Student: It displays / prints the student information
     def print_student(self):
+        print("-" * 60)
         print("* * Student Information * *")
-        print("""Name: %s\nStudent Number: %s\nCourse: %s\nAddress: %s\nPhone Number: %s\n""" %
-              (self.first_n + " " + self.last_n, self.student_no, self.course, self.address, self.phone))
+        print("""Name: %s\nStudent Number: %s\nCourse: %s\nAddress: %s\nPhone Number: %s""" %
+              (self.first_n.upper() + " " + self.last_n.upper(), self.student_no, self.course.upper(),
+               self.address.upper(), self.phone))
+        print("-\n" * 60)
 
 
 class StudentManageInput:
@@ -121,10 +124,10 @@ class StudentManageInput:
     def user_student_info(self):
         first_n = input("Enter the first name of the student: ")
         last_n = input("Enter the last name of the student: ")
-        student_no = str(input("Enter the student number of the student: "))
+        student_no = (input("Enter the student number of the student: "))
         course = input("Enter the course of the student: ")
         address = input("Enter the address of the student: ")
-        phone = str(input("Enter the phone number of the student: "))
+        phone = (input("Enter the phone number of the student: "))
         return first_n, last_n, student_no, course, address, phone
 
     def add_student_to_students(self):
@@ -374,7 +377,8 @@ class StudentManageInput:
         self.StudentFunction.search_students(search_item)
         confirm = input("Would you like to continue managing task? Type y/n: ")
         if confirm.lower() == "y":
-            print("Tasks Registered to "f"{first_n} "f"{last_n}: ""\n")
+            format_item = str(search_item).upper()
+            print("Tasks Registered to "f"{format_item}\n")
             with open("data.txt") as f:
                 for line in f:
                     my_tree.insert(line)

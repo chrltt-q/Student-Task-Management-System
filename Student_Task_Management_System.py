@@ -74,7 +74,7 @@ class StudentFunction:
         counting = len(self.students_list)
         print("               Number of Students Recorded In The Student Task Management System:", counting, "\n")
         if not self.students_list:
-            print("No students found.")
+            print("No students found.\n")
         for student in self.students_list:
             student.print_student()
 
@@ -284,10 +284,7 @@ class StudentManageInput:
             done = input() == "n"
         print("Searching for the student, please wait...")
         self.StudentFunction.search_students(search_item)
-        if not search_item == self.StudentFunction.students_list:
-            print("Going back to the main menu of the Address Book...\n")
-            self.run_menu()
-        confirm = input("\nAre you sure you want to delete this student? Type y/n: ")
+        confirm = input("\nAre you sure you want to continue to delete? Type y/n: ")
         if confirm.lower() == "y":
             self.StudentFunction.delete_student(first_n, last_n, student_no, course, address, phone)
             print("Student deleted successfully in the Student Task Management System!")
@@ -375,70 +372,73 @@ class StudentManageInput:
             done = input() == "n"
         print("Searching for the student, please wait...")
         self.StudentFunction.search_students(search_item)
-        if not search_item == self.StudentFunction.students_list:
-            print("Going back to the main menu of the Address Book...\n")
-            self.run_menu()
-        print("Tasks Registered to "f"{first_n} "f"{last_n}: ""\n")
-        with open("data.txt") as f:
-            for line in f:
-                my_tree.insert(line)
-        while True:
-            print("\nPlease choose an option from the list below:")
-            print("|| 1 ||     View today's scheduled tasks")
-            print("|| 2 ||     Add a task to today's schedule")
-            print("|| 3 ||     Remove a task from the schedule")
-            print("|| 4 ||     Return to Main Menu")
-            selection = input("\nEnter your choice -> ")
-            try:
-                entry = int(selection)
-            except ValueError:
-                print("Please enter a number between 1 and 4")
-                continue
-            if int(selection) == 1:
-                print("\n* * * * * * * * * * * *  VIEW TASK SCHEDULE  * * * * * * * * * * * *\n")
-                my_tree.in_order()
-            elif int(selection) == 2:
-                print("\n* * * * * * * * * * * * * * * ADD TASK * * * * * * * * * * * * * * *\n")
-                print("You have chosen to add a task to the schedule")
-                start_time, duration_of_task, task_name = get_task_input_details()
-                line = start_time + "," + duration_of_task + "," + task_name
-                num = my_tree.length()
-                my_tree.insert(line)
-                if num == my_tree.length() - 1:
-                    with open("data.txt", "a+") as to_write:
-                        to_write.write(line + "\n")
-                input("Press any key to continue... ")
-            elif int(selection) == 3:
-                print("\n* * * * * * * * * * * * * * REMOVE  TASK * * * * * * * * * * * * * *\n")
-                print("You have chosen to remove a task from the schedule")
-                start_time, duration_of_task, task_name = get_task_input_details()
-                key_to_find = datetime.strptime(start_time, '%H:%M').time()
-                result = my_tree.find_val(key_to_find)
-                if result:
-                    if result.name_of_task == task_name and result.duration == duration_of_task:
-                        print("Removing task: ")
-                        print(result)
-                        my_tree.delete_val(key_to_find)
-                        print("Task successfully removed.")
-                        with open("data.txt", "r") as f:
-                            lines = f.readlines()
-                        with open("data.txt", "w") as f:
-                            for line in lines:
-                                if line.strip("\n") != start_time + "," + duration_of_task + "," + task_name:
-                                    f.write(line)
-                        input("Press any key to continue... ")
-                    else:
-                        print("The name and/or duration of task did not match, delete failed")
-                        input("Press any key to continue... ")
-                else:
-                    print("Task not found")
+        confirm = input("Would you like to continue managing task? Type y/n: ")
+        if confirm.lower() == "y":
+            print("Tasks Registered to "f"{first_n} "f"{last_n}: ""\n")
+            with open("data.txt") as f:
+                for line in f:
+                    my_tree.insert(line)
+            while True:
+                print("\nPlease choose an option from the list below:")
+                print("|| 1 ||     View today's scheduled tasks")
+                print("|| 2 ||     Add a task to today's schedule")
+                print("|| 3 ||     Remove a task from the schedule")
+                print("|| 4 ||     Return to Main Menu")
+                selection = input("\nEnter your choice -> ")
+                try:
+                    entry = int(selection)
+                except ValueError:
+                    print("Please enter a number between 1 and 4")
+                    continue
+                if int(selection) == 1:
+                    print("\n* * * * * * * * * * * *  VIEW TASK SCHEDULE  * * * * * * * * * * * *\n")
+                    my_tree.in_order()
+                elif int(selection) == 2:
+                    print("\n* * * * * * * * * * * * * * * ADD TASK * * * * * * * * * * * * * * *\n")
+                    print("You have chosen to add a task to the schedule")
+                    start_time, duration_of_task, task_name = get_task_input_details()
+                    line = start_time + "," + duration_of_task + "," + task_name
+                    num = my_tree.length()
+                    my_tree.insert(line)
+                    if num == my_tree.length() - 1:
+                        with open("data.txt", "a+") as to_write:
+                            to_write.write(line + "\n")
                     input("Press any key to continue... ")
-            elif int(selection) == 4:
-                print("\n* * * * * * * * * * * *  RETURN TO MAIN MENU * * * * * * * * * * * *\n")
-                print("Returning to the main menu of the Student Task Management System...\n")
-                self.run_menu()
-            else:
-                print("Please enter a number between 1 and 4")
+                elif int(selection) == 3:
+                    print("\n* * * * * * * * * * * * * * REMOVE  TASK * * * * * * * * * * * * * *\n")
+                    print("You have chosen to remove a task from the schedule")
+                    start_time, duration_of_task, task_name = get_task_input_details()
+                    key_to_find = datetime.strptime(start_time, '%H:%M').time()
+                    result = my_tree.find_val(key_to_find)
+                    if result:
+                        if result.name_of_task == task_name and result.duration == duration_of_task:
+                            print("Removing task: ")
+                            print(result)
+                            my_tree.delete_val(key_to_find)
+                            print("Task successfully removed.")
+                            with open("data.txt", "r") as f:
+                                lines = f.readlines()
+                            with open("data.txt", "w") as f:
+                                for line in lines:
+                                    if line.strip("\n") != start_time + "," + duration_of_task + "," + task_name:
+                                        f.write(line)
+                            input("Press any key to continue... ")
+                        else:
+                            print("The name and/or duration of task did not match, delete failed")
+                            input("Press any key to continue... ")
+                    else:
+                        print("Task not found")
+                        input("Press any key to continue... ")
+                elif int(selection) == 4:
+                    print("\n* * * * * * * * * * * *  RETURN TO MAIN MENU * * * * * * * * * * * *\n")
+                    print("Returning to the main menu of the Student Task Management System...\n")
+                    self.run_menu()
+                else:
+                    print("Please enter a number between 1 and 4")
+        elif confirm.lower() == "n":
+            print("No changes in managing task in the Student Task Management System.")
+            print("Returning to the main menu of the Student Task Management System...\n")
+            self.run_menu()
 
     def option_from_main_menu(self, option):
         if option == "1":

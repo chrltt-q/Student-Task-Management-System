@@ -16,7 +16,7 @@ class Node:
 
     def __str__(self):
         return f"Time: {self.data}, Duration: {self.duration}, End: {self.scheduled_end}, " \
-               f"Task name: {self.name_of_task}"
+               f"Task Name: {self.name_of_task}"
 
 
 class BSTDemo:
@@ -50,14 +50,14 @@ class BSTDemo:
 
     def helpful_print(self, key, succeeded):
         if succeeded:
-            print(f"Added:\t\t {key.name_of_task}")
-            print(f"Begin:\t\t {key.data}")
-            print(f"End:\t\t {key.scheduled_end}")
+            print(f"Added Task:\t\t {key.name_of_task}")
+            print(f"Begin Time:\t\t {key.data}")
+            print(f"End Time:\t\t {key.scheduled_end}")
             print("-"*60)
         else:
-            print(f"Rejected:\t {key.name_of_task}")
-            print(f"Begin:\t\t {key.data}")
-            print(f"End:\t\t {key.scheduled_end}")
+            print(f"Rejected Task:\t {key.name_of_task}")
+            print(f"Begin Time:\t\t {key.data}")
+            print(f"End Time:\t\t {key.scheduled_end}")
             print("Reason:\t Time slot overlap, please verify")
             print("-"*60)
 

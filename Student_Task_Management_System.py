@@ -380,11 +380,11 @@ class StudentManageInput:
                     my_tree.insert(line)
             while True:
                 print("\nPlease choose an option from the list below:")
-                print("|| 1 ||     View today's scheduled tasks")
-                print("|| 2 ||     Add a task to today's schedule")
-                print("|| 3 ||     Remove a task from the schedule")
+                print("|| 1 ||     View Today's Scheduled Tasks")
+                print("|| 2 ||     Add a Task to Today's Schedule")
+                print("|| 3 ||     Remove a Task from the Schedule")
                 print("|| 4 ||     Return to Main Menu")
-                selection = input("\nEnter your choice -> ")
+                selection = input("\nEnter your choice: ")
                 try:
                     entry = int(selection)
                 except ValueError:
@@ -490,7 +490,7 @@ class StudentManageInput:
             print("***~~~***~~~*~*~~*~*~*~*~*~~*~*~***~*~*~~*~*~*~*~*~~*~*~~~******~~~***")
             print("                   Student Task Management System                     ")
             print("***~~~***~~~*~*~~*~*~*~*~*~~*~*~***~*~*~~*~*~*~*~*~~*~*~~~******~~~***")
-            welcome = "                        Welcome  Student!                        \n"
+            welcome = "                         Welcome Student!                        \n"
             main_menu = """What would you like to do?
                ||  1  ||    Add Student         
                ||  2  ||    Edit Student        

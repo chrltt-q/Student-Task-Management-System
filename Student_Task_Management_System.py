@@ -402,7 +402,7 @@ class StudentManageInput:
                 print("\nPlease choose an option from the list below:")
                 print("|| 1 ||     View Today's Scheduled Tasks")
                 print("|| 2 ||     Add a Task to Today's Schedule")
-                print("|| 3 ||     Remove a Task from the Schedule")
+                print("|| 3 ||     Delete a Task from the Schedule")
                 print("|| 4 ||     Return to Main Menu")
                 selection = input("\nEnter your choice: ")
                 try:
@@ -425,17 +425,17 @@ class StudentManageInput:
                             to_write.write(line + "\n")
                     input("Press any key to continue... ")
                 elif int(selection) == 3:
-                    print("\n* * * * * * * * * * * * * * REMOVE  TASK * * * * * * * * * * * * * *\n")
-                    print("You have chosen to remove a task from the schedule")
+                    print("\n* * * * * * * * * * * * * * DELETE  TASK * * * * * * * * * * * * * *\n")
+                    print("You have chosen to delete a task from the schedule")
                     start_time, duration_of_task, task_name = get_task_input_details()
                     key_to_find = datetime.strptime(start_time, '%H:%M').time()
                     result = my_tree.find_val(key_to_find)
                     if result:
                         if result.name_of_task == task_name and result.duration == duration_of_task:
-                            print("Removing task: ")
+                            print("Deleting task: ")
                             print(result)
                             my_tree.delete_val(key_to_find)
-                            print("Task successfully removed.")
+                            print("Task successfully deleted.")
                             with open("data.txt", "r") as f:
                                 lines = f.readlines()
                             with open("data.txt", "w") as f:

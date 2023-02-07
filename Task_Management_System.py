@@ -34,7 +34,36 @@ class StudentFunction:
     # Function Add Student: The user can add student information - name, student number, course
     # address, and contact number
     def add_student(self, first_n, last_n, student_no, course, address, phone):
-        self.students_list.append()
+        self.students_list.append(Student(first_n, last_n, student_no, course, address, phone))
+
+    # Function Edit Student Information - The user can edit any information of the student
+    def edit_student(self, first_n, new_first_n, last_n, new_last_n, student_no, new_student_no, course, new_course,
+                     address, new_address, phone, new_phone, option):
+        for student in self.students_list:
+            if student.first_n == first_n or student.last_n == last_n or student.student_no == student_no \
+                    or student.course == course or student.address == address or student.phone == phone:
+                if option == "a":
+                    edited_first_n = first_n.replace(first_n, new_first_n)
+                    student.first_n = edited_first_n
+                elif option == "b":
+                    edited_last_n = last_n.replace(last_n, new_last_n)
+                    student.last_n = edited_last_n
+                elif option == "c":
+                    edited_student_no = student_no.replace(student, new_student_no)
+                    student.student_no = edited_student_no
+                elif option == "d":
+                    edited_course = course.replace(course, new_course)
+                    student.course = edited_course
+                elif option == "e":
+                    edited_address = address.replace(address, new_address)
+                    student.address = edited_address
+                elif option == "f":
+                    edited_phone = phone.replace(phone, new_phone)
+                    student.phone = edited_phone
+        if not self.students_list:
+            print("Student not found.")
+
+    
 
 
 class Student:

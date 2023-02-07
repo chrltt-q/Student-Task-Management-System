@@ -143,9 +143,90 @@ class StudentManageInput:
                 continue
             elif add_again.lower() == "n" or add_again.lower() == "no":
                 print("Returning to the main menu of the Student Task Management System...\n")
+                self.run_menu()
                 break
 
-
+    def edit_student_from_students(self):
+        print("\n                        * * * EDIT STUDENT * * *                        \n")
+        done = False
+        final_done = False
+        first_n = " "
+        last_n = " "
+        student_no = " "
+        course = " "
+        address = " "
+        phone = " "
+        new_first_n = " "
+        new_last_n = " "
+        new_student_no = " "
+        new_course = " "
+        new_address = " "
+        new_phone = " "
+        option = " "
+        while not done:
+            print("Which Student in the System do you want to edit?")
+            print("""   Choose an option below to locate the student.   
+               (a) First Name
+               (b) Last Name
+               (c) Student Number
+               (d) Course
+               (e) Address
+               (f) Phone Number""")
+            edit1_option = input("Enter the option you choose (a-f): ")
+            if edit1_option.lower() == "a":
+                first_n = input("Enter the first name of this student: ")
+            elif edit1_option.lower() == "b":
+                last_n = input("Enter the last name of this student: ")
+            elif edit1_option.lower() == "c":
+                student_no = input("Enter the student number of this student: ")
+            elif edit1_option.lower() == "d":
+                course = str(input("Please enter the course of this student: "))
+            elif edit1_option.lower() == "e":
+                address = input("Enter the address of this student: ")
+            elif edit1_option.lower() == "f":
+                phone = str(input("Enter the phone number of this student: "))
+            else:
+                print("Please enter a valid input!")
+                continue
+            print("Would you like to enter more information? Type y/n: ")
+            done = input() == "n"
+            print("Searching for the student you want to edit, please wait...")
+            self.StudentFunction.search_students(first_n, last_n, student_no, course, address, phone)
+            if not self.StudentFunction.students_list:
+                print("Returning to the main menu of the System...\n")
+                self.run_menu()
+        while not final_done:
+            print("""   What information from this student do you want to edit?   
+               (a) First Name
+               (b) Last Name
+               (c) Student Number
+               (d) Course
+               (e) Address
+               (f) Phone Number""")
+            edit2_option = input("Enter the option you choose (a-f): ")
+            if edit2_option.lower() == "a":
+                new_first_n = input("Enter the new first name of this student: ")
+            elif edit2_option.lower() == "b":
+                new_last_n = input("Enter the new last name of this student: ")
+            elif edit2_option.lower() == "c":
+                new_student_no = input("Enter the student number of this student: ")
+            elif edit2_option.lower() == "d":
+                new_course = str(input("Please enter the course of this student: "))
+            elif edit2_option.lower() == "e":
+                new_address = input("Enter the new address of this student: ")
+            elif edit2_option.lower() == "f":
+                new_phone = str(input("Enter the new phone number of this student: "))
+            else:
+                print("Please enter a valid input!")
+                continue
+            print("Do you want to save the changes you edited for this contact? Type y/n: ")
+            final_done = input() == "y"
+            option = edit2_option
+        self.StudentFunction.edit_student(first_n, new_first_n, last_n, new_last_n, student_no, new_student_no,
+                                          course, new_course, address, new_address, phone, new_phone, option)
+        print("Changes in the student have been saved successfully!")
+        print("Returning to the main menu of the System...\n")
+        self.run_menu()
 
 
 with open("data.txt") as f:

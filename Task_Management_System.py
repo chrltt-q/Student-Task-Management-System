@@ -32,11 +32,11 @@ with open("data.txt") as f:
         my_tree.insert(line)
 
 while True:
-    print("Please choose an option from the list below:")
-    print("|| 1 ||   View today's scheduled tasks")
-    print("|| 2 ||   Add a task to today's schedule")
-    print("|| 3 ||   Remove a task from the schedule")
-    print("|| 4 ||   Exit")
+    print("\nPlease choose an option from the list below:")
+    print("|| 1 ||     View today's scheduled tasks")
+    print("|| 2 ||     Add a task to today's schedule")
+    print("|| 3 ||     Remove a task from the schedule")
+    print("|| 4 ||     Exit")
     selection = input("\nEnter your choice -> ")
     try:
         entry = int(selection)
@@ -44,8 +44,10 @@ while True:
         print("Please enter a number between 1 and 4")
         continue
     if int(selection) == 1:
+        print("\n* * * * * * * * * * * *  VIEW TASK SCHEDULE  * * * * * * * * * * * *\n")
         my_tree.in_order()
     elif int(selection) == 2:
+        print("\n* * * * * * * * * * * * * * * ADD TASK * * * * * * * * * * * * * * *\n")
         print("You have chosen to add a task to the schedule")
         start_time, duration_of_task, task_name = get_task_input_details()
         line = start_time + "," + duration_of_task + "," + task_name
@@ -56,6 +58,7 @@ while True:
                 to_write.write(line+"\n")
         input("Press any key to continue... ")
     elif int(selection) == 3:
+        print("\n* * * * * * * * * * * * * * REMOVE  TASK * * * * * * * * * * * * * *\n")
         print("You have chosen to remove a task from the schedule")
         start_time, duration_of_task, task_name = get_task_input_details()
         key_to_find = datetime.strptime(start_time, '%H:%M').time()
@@ -70,7 +73,7 @@ while True:
                     lines = f.readlines()
                 with open("data.txt", "w") as f:
                     for line in lines:
-                        if line.strip("\n") != start_time + "," + duration_of_task + ","+task_name:
+                        if line.strip("\n") != start_time + "," + duration_of_task + "," + task_name:
                             f.write(line)
                 input("Press any key to continue... ")
             else:
@@ -80,6 +83,7 @@ while True:
             print("Task not found")
             input("Press any key to continue... ")
     elif int(selection) == 4:
+        print("\n* * * * * * * * * * * * * * *   EXIT   * * * * * * * * * * * * * * *\n")
         print("Exiting program...")
         break
     else:

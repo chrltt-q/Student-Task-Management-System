@@ -228,6 +228,59 @@ class StudentManageInput:
         print("Returning to the main menu of the System...\n")
         self.run_menu()
 
+    def delete_student_from_students(self):
+        print("\n                       * * * DELETE STUDENT * * *                       \n")
+        done = False
+        first_n = " "
+        last_n = " "
+        student_no = " "
+        course = " "
+        address = " "
+        phone = " "
+        while not done:
+            print("Which Student in the System do you want to delete?")
+            print("""   Choose an option below to locate the student.   
+                           (a) First Name
+                           (b) Last Name
+                           (c) Student Number
+                           (d) Course
+                           (e) Address
+                           (f) Phone Number""")
+            del_option = input("Enter the option you choose (a-f): ")
+            if del_option.lower() == "a":
+                first_n = input("Enter the first name of this student: ")
+            elif del_option.lower() == "b":
+                last_n = input("Enter the last name of this student: ")
+            elif del_option.lower() == "c":
+                student_no = input("Enter the student number of this student: ")
+            elif del_option.lower() == "d":
+                course = str(input("Enter the course of this student: "))
+            elif del_option.lower() == "e":
+                address = input("Enter the address of this student: ")
+            elif del_option.lower() == "f":
+                phone = str(input("Enter the phone number of this student: "))
+            else:
+                print("Please enter a valid input!")
+                continue
+            print("Would you like to enter more information? Type y/n: ")
+            done = input() == "n"
+            print("Searching for the student you want to delete, please wait...")
+            self.StudentFunction.search_students(first_n, last_n, student_no, course, address, phone)
+            if not self.StudentFunction.students_list:
+                print("Returning to the main menu of the System...\n")
+                self.run_menu()
+        confirm = input("\nAre you sure you want to delete this student in the System? Type y/n: ")
+        if confirm.lower() == "y":
+            self.StudentFunction.delete_student(first_n, last_n, address, phone)
+            print("Student deleted successfully!")
+            print("Returning to the main menu of the System...\n")
+            self.run_menu()
+        elif confirm.lower() == "n":
+            print("Student is not deleted in the System.")
+            print("Returning to the main menu of the System...\n")
+            self.run_menu()
+
+
 
 with open("data.txt") as f:
     for line in f:

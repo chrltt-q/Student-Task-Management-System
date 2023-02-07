@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+
 class Node:
     def __init__(self, key):
         sched_time, duration, name_of_job = key.split(",")

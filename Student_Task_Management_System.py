@@ -1,33 +1,29 @@
-print("******** PROGRAMMED BY ********")
-print("****** Charlotte Quezada ******")
-print("********** BSCOE 2-2 **********")
-print("*** Sir Danilo Madrigalejos ***\n")
-
 from datetime import datetime
 from bst_demo import BSTDemo, Node
 
 
-def get_job_input_details():
-    start_time = input("Enter the time in hh:mm format, example 18:30 or 6:30-> ")
+def get_task_input_details():
+    start_time = input("Enter the time in hh:mm format, example 18:30 or 6:30 -> ")
     while True:
         try:
             datetime.strptime(start_time, '%H:%M')
         except ValueError:
-            print("Incorrect time format, should be hh:mm")
-            start_time = input("Enter the time in hh:mm format, ex 18:30 or 6:30-> ")
+            print("Incorrect time format, it should be hh:mm")
+            start_time = input("Enter the time in hh:mm format, ex 18:30 or 6:30 -> ")
         else:
             break
-    duration_of_job = input("Enter the duration of the job in minutes, ex 60-> ")
+    duration_of_task = input("Enter the duration of the task in minutes, ex 60 -> ")
     while True:
         try:
-            int(duration_of_job)
+            int(duration_of_task)
         except ValueError:
-            print("Please enter a number for number of minutes")
-            duration_of_job = input("Enter the duration of the job in minutes, ex 60-> ")
+            print("Please enter a valid number for number of minutes.")
+            duration_of_task = input("Enter the duration of the task in minutes, ex 60 -> ")
         else:
             break
-    job_name = input("Enter the name of the job (case sensitive)-> ")
-    return start_time, duration_of_job, job_name
+    task_name = input("Enter the name of the task (case sensitive)-> ")
+    return start_time, duration_of_task, task_name
+
 
 my_tree = BSTDemo()
 
@@ -51,7 +47,7 @@ while True:
         my_tree.in_order()
     elif int(selection) == 2:
         print("You have chosen to add a job to the schedule")
-        start_time, duration_of_job, job_name = get_job_input_details()
+        start_time, duration_of_job, job_name = get_task_input_details()
         line = start_time+","+duration_of_job+","+job_name
         num = my_tree.length()
         my_tree.insert(line)
@@ -61,7 +57,7 @@ while True:
         input("Press any key to continue... ")
     elif int(selection) == 3:
         print("You have chosen to remove a job from the schedule")
-        start_time, duration_of_job, job_name = get_job_input_details()
+        start_time, duration_of_job, job_name = get_task_input_details()
         key_to_find = datetime.strptime(start_time, '%H:%M').time()
         result = my_tree.find_val(key_to_find)
         if result:

@@ -240,12 +240,12 @@ class StudentManageInput:
         while not done:
             print("Which Student in the System do you want to delete?")
             print("""   Choose an option below to locate the student.   
-                           (a) First Name
-                           (b) Last Name
-                           (c) Student Number
-                           (d) Course
-                           (e) Address
-                           (f) Phone Number""")
+               (a) First Name
+               (b) Last Name
+               (c) Student Number
+               (d) Course
+               (e) Address
+               (f) Phone Number""")
             del_option = input("Enter the option you choose (a-f): ")
             if del_option.lower() == "a":
                 first_n = input("Enter the first name of this student: ")
@@ -280,6 +280,50 @@ class StudentManageInput:
             print("Returning to the main menu of the System...\n")
             self.run_menu()
 
+    def create_search(self):
+        print("\n                        * * * SEARCH STUDENT * * *                        \n")
+        done = False
+        first_n = " "
+        last_n = " "
+        student_no = " "
+        course = " "
+        address = " "
+        phone = " "
+        while not done:
+            print("Which Student in the System do you want to search?")
+            print("""   Choose an option below to locate the student.   
+               (a) First Name
+               (b) Last Name
+               (c) Student Number
+               (d) Course
+               (e) Address
+               (f) Phone Number""")
+            respond = input("Enter the option you choose (a-f): ")
+            if respond.lower() == "a":
+                first_n = input("Enter the first name of this student: ")
+            elif respond.lower() == "b":
+                last_n = input("Enter the last name of this student: ")
+            elif respond.lower() == "c":
+                student_no = input("Enter the student number of this student: ")
+            elif respond.lower() == "d":
+                course = str(input("Enter the course of this student: "))
+            elif respond.lower() == "e":
+                address = input("Enter the address of this student: ")
+            elif respond.lower() == "f":
+                phone = str(input("Enter the phone number of this student: "))
+            else:
+                print("Please enter a valid input!")
+                continue
+            print("Would you like to enter more information? Type y/n: ")
+            done = input() == "n"
+        print("Searching for the student, please wait...")
+        self.StudentFunction.search_students(first_n, last_n, student_no, course, address, phone)
+        print("Returning to the main menu of the System...\n")
+        self.run_menu()
+
+    def add_task_to_student(self):
+
+    def run_menu(self):
 
 
 with open("data.txt") as f:

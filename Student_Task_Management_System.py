@@ -127,6 +127,24 @@ class StudentManageInput:
         phone = str(input("Enter the phone number of the student: "))
         return first_n, last_n, student_no, course, address, phone
 
+    def add_student_to_students(self):
+        print("\n                        * * * ADD STUDENT * * *                        \n")
+        first_n, last_n, student_no, course, address, phone = self.user_student_info()
+        self.StudentFunction.add_student(first_n, last_n, student_no, course, address, phone)
+        while True:
+            if first_n == "" and last_n == "" and student_no == "" and course == "" and address == "" and phone == "":
+                print("Error! Please fill all the fields.")
+            else:
+                print("Student added, we have saved the student's information successfully!\n")
+            add_again = input("Would you like to add another student? Type y/n: ")
+            if add_again.lower() == "y" or add_again.lower() == "yes":
+                first_n, last_n, student_no, course, address, phone = self.user_student_info()
+                self.StudentFunction.add_student(first_n, last_n, student_no, course, address, phone)
+                continue
+            elif add_again.lower() == "n" or add_again.lower() == "no":
+                print("Returning to the main menu of the Student Task Management System...\n")
+                break
+
 
 
 

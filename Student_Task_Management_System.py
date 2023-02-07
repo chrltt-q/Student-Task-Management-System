@@ -1,6 +1,11 @@
 from datetime import datetime
 from bst_demo import BSTDemo, Node
 
+print("******** PROGRAMMED BY ********")
+print("****** Charlotte Quezada ******")
+print("********** BSCOE 2-2 **********")
+print("*** Sir Danilo Madrigalejos ***\n")
+
 
 def get_task_input_details():
     start_time = input("Enter the time in hh:mm format (example 18:30 or 6:30): ")

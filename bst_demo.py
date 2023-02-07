@@ -15,7 +15,8 @@ class Node:
         self.right_child = None
 
     def __str__(self):
-        return f"Time: {self.data}, Duration: {self.duration}, End: {self.scheduled_end}, Job name: {self.name_of_task}"
+        return f"Time: {self.data}, Duration: {self.duration}, End: {self.scheduled_end}, " \
+               f"Task name: {self.name_of_task}"
 
 
 class BSTDemo:
